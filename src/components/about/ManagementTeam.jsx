@@ -1,11 +1,35 @@
-const team = [
-  { name: 'Ir. Hendra Wijaya', position: 'Direktur Utama', photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Agus Setiawan, S.T.', position: 'Direktur Operasional & Teknik', photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Rina Kusuma, M.M.', position: 'Direktur Keuangan', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Budi Prakoso, S.T.', position: 'Head of Project Management', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80' }
-]
+import { useEffect, useState } from 'react'
+import { fetchData } from '../../lib/supabaseClient'
 
 export default function ManagementTeam() {
+  const [team, setTeam] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadTeam = async () => {
+      setLoading(true)
+      const { data, error } = await fetchData('team_members', {
+        filter: { is_active: true },
+        order: { column: 'order_index', ascending: true }
+      })
+
+      if (!error && data && data.length > 0) {
+        setTeam(data)
+      }
+      setLoading(false)
+    }
+
+    loadTeam()
+  }, [])
+
+  if (loading) {
+    return <div className="py-16 text-center text-slate-500 bg-slate-50">Memuat tim manajemen...</div>
+  }
+
+  if (team.length === 0) {
+    return null
+  }
+
   return (
     <section className="py-16 bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-6xl px-4 text-center">
@@ -19,17 +43,24 @@ export default function ManagementTeam() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {team.map((member, index) => (
-            <div key={index} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
+          {team.map((member) => (
+            <div key={member.id} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
               <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden bg-slate-100 border-2 border-orange-100">
-                <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                <img 
+                  src={member.photo_url || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'} 
+                  alt={member.name} 
+                  className="w-full h-full object-cover" 
+                />
               </div>
               <h3 className="text-base font-bold text-slate-900">{member.name}</h3>
               <p className="text-xs text-[#ff6b00] font-medium mt-0.5">{member.position}</p>
+              {member.bio && (
+                <p className="text-[11px] text-slate-500 mt-2 line-clamp-2">{member.bio}</p>
+              )}
             </div>
           ))}
         </div>
       </div>
     </section>
   )
-}
+}

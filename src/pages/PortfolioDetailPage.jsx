@@ -17,8 +17,8 @@ export default function PortfolioDetailPage() {
         single: true
       })
 
-      if (!error && data) {
-        setProject(data)
+      if (!error && data && data.length > 0) {
+        setProject(data[0])
       } else {
         setProject(null)
       }

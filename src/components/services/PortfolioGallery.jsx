@@ -2,8 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchData } from '../../lib/supabaseClient'
 
-const categories = ['Semua', 'Web', 'Mobile', 'Design', 'Marketing']
-
 export default function PortfolioGallery() {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
@@ -26,12 +24,20 @@ export default function PortfolioGallery() {
     loadProjects()
   }, [])
 
+  const categories = useMemo(() => {
+    const set = new Set()
+    projects.forEach(p => {
+      if (p.category) set.add(p.category.trim())
+    })
+    return ['Semua', ...Array.from(set)]
+  }, [projects])
+
   const filteredProjects = useMemo(() => {
     if (activeCategory === 'Semua') return projects
 
     return projects.filter((project) => {
       const category = (project.category || '').toLowerCase()
-      return category.includes(activeCategory.toLowerCase())
+      return category === activeCategory.toLowerCase()
     })
   }, [activeCategory, projects])
 
@@ -47,21 +53,23 @@ export default function PortfolioGallery() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                activeCategory === category
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 border border-gray-200'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+        {categories.length > 1 && (
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                  activeCategory === category
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 border border-gray-200'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        )}
 
         {loading ? (
           <div className="text-center text-gray-600">Memuat portofolio...</div>

@@ -1,27 +1,36 @@
+import { useEffect, useState } from 'react'
+import { fetchData } from '../../lib/supabaseClient'
 import { FaQuoteLeft } from 'react-icons/fa'
 
-const testimonials = [
-  {
-    name: 'Eko Santoso',
-    position: 'Project Manager',
-    company: 'PT Nusantara Rekayasa',
-    content: 'PT AKMI KARYA GLOBAL memberikan hasil pekerjaan konstruksi gudang logistik kami tepat waktu dengan kualitas pengelasan dan struktur yang sangat presisi.'
-  },
-  {
-    name: 'Bambang Wijaya',
-    position: 'VP Operations',
-    company: 'PT Industri Energi Bersama',
-    content: 'Kerja sama yang sangat luar biasa dalam pemeliharaan pabrik kami. Tim teknisi sangat responsif dan mengutamakan keselamatan kerja.'
-  },
-  {
-    name: 'Deni Setiawan',
-    position: 'Head of Plant',
-    company: 'Megah Perkasa Group',
-    content: 'Manajemen proyek profesional dan penyediaan material konstruksi tepat waktu. Kami sangat merekomendasikan PT AKMI KARYA GLOBAL.'
-  }
-]
-
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadTestimonials = async () => {
+      setLoading(true)
+      const { data, error } = await fetchData('testimonials', {
+        filter: { is_active: true },
+        order: { column: 'order_index', ascending: true }
+      })
+
+      if (!error && data && data.length > 0) {
+        setTestimonials(data)
+      }
+      setLoading(false)
+    }
+
+    loadTestimonials()
+  }, [])
+
+  if (loading) {
+    return <div className="py-16 text-center text-slate-500 bg-slate-50">Memuat testimoni...</div>
+  }
+
+  if (testimonials.length === 0) {
+    return null
+  }
+
   return (
     <section className="py-16 bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-6xl px-4">
@@ -33,8 +42,8 @@ export default function Testimonials() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-left flex flex-col justify-between">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-left flex flex-col justify-between">
               <div>
                 <p className="text-xs text-slate-600 leading-relaxed mb-4">
                   "{testimonial.content}"
@@ -45,8 +54,10 @@ export default function Testimonials() {
                   <FaQuoteLeft className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-900">{testimonial.name}</p>
-                  <p className="text-[10px] text-slate-400">{testimonial.position} - {testimonial.company}</p>
+                  <p className="text-xs font-bold text-slate-900">{testimonial.client_name}</p>
+                  <p className="text-[10px] text-slate-400">
+                    {[testimonial.position, testimonial.company].filter(Boolean).join(' - ')}
+                  </p>
                 </div>
               </div>
             </div>
@@ -55,4 +66,4 @@ export default function Testimonials() {
       </div>
     </section>
   )
-}
+}
