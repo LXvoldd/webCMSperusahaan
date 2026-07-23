@@ -1,22 +1,115 @@
 @import "tailwindcss";
 
 :root {
-  --text: #6b6375;
+  /* ============================================
+     BACKGROUND VARIANTS - Untuk Selang-seling
+     ============================================ */
+  --bg-light: #F8F9FA;      /* Soft white untuk section 1 */
+  --bg-white: #FFFFFF;       /* Pure white untuk section 2 */
+  --bg-warm: #FDF8F5;       /* Warm white untuk section 3 */
+  --bg-cool: #F5F7FA;       /* Cool white untuk section 4 */
+  --bg-cream: #FDFBF7;      /* Cream white untuk section 5 */
+  --bg-soft: #FAFAFA;       /* Off white untuk alternatif */
+  
+  /* ============================================
+     BACKGROUND ALTERNATIVE - Warna Non-Putih
+     ============================================ */
+  --bg-lavender: #F5F0FF;   /* Lavender soft */
+  --bg-peach: #FFF5F0;      /* Peach soft */
+  --bg-mint: #F0FFF4;       /* Mint soft */
+  --bg-sky: #F0F8FF;        /* Sky blue soft */
+  --bg-rose: #FFF0F5;       /* Rose soft */
+  --bg-amber: #FFFBEB;      /* Amber soft */
+  
+  /* ============================================
+     EARTH TONE SERIES
+     ============================================ */
+  --bg-stone: #F5F2EE;      /* Stone */
+  --bg-clay: #F3EDE8;       /* Clay */
+  --bg-sand: #FDF6EC;       /* Sand */
+  --bg-dune: #EDE8E1;       /* Dune */
+  --bg-terra: #F0EBE6;      /* Terra */
+
+  /* ============================================
+     MUTED SERIES
+     ============================================ */
+  --bg-slate: #F1F5F9;      /* Slate */
+  --bg-muted-blue: #EEF2F6; /* Muted Blue */
+  --bg-muted-green: #F0F4F0;/* Muted Green */
+  --bg-muted-pink: #F5F0F2; /* Muted Pink */
+  --bg-muted-purple: #F2EFF5;/* Muted Purple */
+
+  /* ============================================
+     TEXT COLORS
+     ============================================ */
   --text-h: #08060d;
   --bg: #fff;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  
+  /* ============================================
+     SOCIAL & SHADOW
+     ============================================ */
   --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
+  /* ============================================
+     FONTS
+     ============================================ */
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
+  /* ============================================
+     PRIMARY COLORS - NAVY
+     ============================================ */
+  --primary: #0A1628;        /* Navy gelap premium */
+  --primary-light: #1A2A4A;  /* Navy medium */
+  --primary-dark: #060E1A;   /* Navy paling gelap */
+
+  /* ============================================
+     ACCENT COLORS - ORANGE
+     ============================================ */
+  --accent: #FF6B00;              /* Oranye utama */
+  --accent-hover: #E86000;        /* Oranye hover */
+  --accent-light: #FF8A3D;        /* Oranye terang */
+  --accent-glow: rgba(255, 107, 0, 0.15);
+
+  /* ============================================
+     SECONDARY ACCENT - GOLD
+     ============================================ */
+  --gold: #C9A84C;           /* Gold premium */
+  --gold-light: #E8D5A3;     /* Gold terang */
+
+  /* ============================================
+     NEUTRAL COLORS
+     ============================================ */
+  --white: #FFFFFF;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1E293B;
+  --gray-900: #0F172A;
+
+  /* ============================================
+     GRADIENT COMBINATIONS
+     ============================================ */
+  --gradient-orange: linear-gradient(135deg, #FF6B00, #FF8A3D);
+  --gradient-gold: linear-gradient(135deg, #C9A84C, #E8D5A3);
+  --gradient-dark: linear-gradient(135deg, #0A1628, #1A2A4A);
+  --gradient-lavender: linear-gradient(135deg, #7C3AED, #A78BFA);
+  --gradient-mint: linear-gradient(135deg, #00AA13, #34D399);
+  --gradient-peach: linear-gradient(135deg, #FF6B00, #FCD34D);
+  --gradient-sky: linear-gradient(135deg, #3B82F6, #60A5FA);
+
+  /* ============================================
+     BASE STYLES
+     ============================================ */
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -26,12 +119,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
+/* ============================================
+   DARK MODE
+   ============================================ */
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -43,8 +135,17 @@
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    
+    /* Dark mode background variants */
+    --bg-light: #1a1a2e;
+    --bg-warm: #1e1a2e;
+    --bg-cool: #16213e;
+    --bg-soft: #1a1a2e;
+    --bg-lavender: #1a1a2e;
+    --bg-peach: #2e1a1a;
+    --bg-mint: #1a2e1a;
+    --bg-sky: #1a1a2e;
   }
 
   #social .button-icon {
@@ -52,6 +153,18 @@
   }
 }
 
+/* ============================================
+   RESPONSIVE FONT SIZE
+   ============================================ */
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
 html {
   overflow-x: hidden;
 }
@@ -73,8 +186,10 @@ body {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1:not([class]), h2:not([class]) {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
@@ -84,26 +199,20 @@ h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
 }
 
-code,
-.counter {
+
+/* ============================================
+   CODE & COUNTER
+   ============================================ */
+code, .counter {
   font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
@@ -115,4 +224,149 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+  h2 {
+    font-size: 20px;
+  }
+}
+
+/* ============================================
+   FONT STYLE RESET
+   ============================================ */
+/* Reset semua teks agar tidak miring kecuali ada class khusus */
+* {
+  font-style: normal !important;
+}
+
+/* Kecuali untuk elemen yang memang harus miring (seperti quote) */
+.italic {
+  font-style: italic !important;
+}
+
+/* ============================================
+   UTILITY CLASSES - Background Variants
+   ============================================ */
+.bg-light { background: var(--bg-light); }
+.bg-warm { background: var(--bg-warm); }
+.bg-cool { background: var(--bg-cool); }
+.bg-cream { background: var(--bg-cream); }
+.bg-soft { background: var(--bg-soft); }
+.bg-lavender { background: var(--bg-lavender); }
+.bg-peach { background: var(--bg-peach); }
+.bg-mint { background: var(--bg-mint); }
+.bg-sky { background: var(--bg-sky); }
+.bg-rose { background: var(--bg-rose); }
+.bg-amber { background: var(--bg-amber); }
+.bg-stone { background: var(--bg-stone); }
+.bg-clay { background: var(--bg-clay); }
+.bg-sand { background: var(--bg-sand); }
+
+/* ============================================
+   UTILITY CLASSES - Gradient Backgrounds
+   ============================================ */
+.bg-gradient-orange { background: var(--gradient-orange); }
+.bg-gradient-gold { background: var(--gradient-gold); }
+.bg-gradient-dark { background: var(--gradient-dark); }
+.bg-gradient-lavender { background: var(--gradient-lavender); }
+.bg-gradient-mint { background: var(--gradient-mint); }
+.bg-gradient-peach { background: var(--gradient-peach); }
+.bg-gradient-sky { background: var(--gradient-sky); }
+
+/* ============================================
+   UTILITY CLASSES - Text Gradients
+   ============================================ */
+.text-gradient-orange {
+  background: var(--gradient-orange);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-dark {
+  background: var(--gradient-dark);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   UTILITY CLASSES - Shadows
+   ============================================ */
+.shadow-soft {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.shadow-medium {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-glow-orange {
+  box-shadow: 0 4px 30px rgba(255, 107, 0, 0.15);
+}
+
+.shadow-glow-gold {
+  box-shadow: 0 4px 30px rgba(201, 168, 76, 0.15);
+}
+
+/* ============================================
+   UTILITY CLASSES - Borders
+   ============================================ */
+.border-soft {
+  border-color: var(--gray-200);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+.border-gold {
+  border-color: var(--gold);
 }

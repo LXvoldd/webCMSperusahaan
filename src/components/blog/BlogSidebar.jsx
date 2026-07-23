@@ -1,4 +1,4 @@
-import { FaSearch } from 'react-icons/fa'
+import { FaSearch, FaTag, FaFire, FaFolder } from 'react-icons/fa'
 
 const categories = [
   { name: 'Teknologi', count: 12 },
@@ -20,31 +20,34 @@ const tags = ['AI', 'Technology', 'Marketing', 'Security', 'React', 'Vue.js', 'C
 
 export default function BlogSidebar() {
   return (
-    <aside className="space-y-8">
-      {/* Search */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Cari Artikel</h3>
+    <aside className="space-y-6 lg:sticky lg:top-24">
+      {/* Search - Desain Minimalis */}
+      <div className="bg-white rounded-2xl border border-[#E8EAED] p-5">
+        <h3 className="text-sm font-bold text-gray-900 mb-3">Cari Artikel</h3>
         <div className="relative">
           <input
             type="text"
-            placeholder="Cari artikel..."
-            className="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            placeholder="Ketik kata kunci..."
+            className="w-full pl-4 pr-12 py-2.5 bg-[#F8F9FA] border border-[#E8EAED] rounded-xl focus:outline-none focus:border-[#FF6B00] focus:ring-2 focus:ring-[#FF6B00]/10 transition-all text-sm"
           />
-          <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600">
+          <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#FF6B00] transition-colors">
             <FaSearch />
           </button>
         </div>
       </div>
 
-      {/* Categories */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Kategori</h3>
-        <ul className="space-y-3">
+      {/* Categories - Desain Minimalis */}
+      <div className="bg-white rounded-2xl border border-[#E8EAED] p-5">
+        <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <FaFolder className="text-[#FF6B00] w-4 h-4" />
+          Kategori
+        </h3>
+        <ul className="space-y-2">
           {categories.map((cat, index) => (
             <li key={index}>
-              <a href="#" className="flex items-center justify-between text-gray-600 hover:text-blue-600 transition-colors">
-                <span>{cat.name}</span>
-                <span className="bg-gray-100 text-gray-500 px-2 py-1 rounded-full text-xs">
+              <a href="#" className="flex items-center justify-between text-sm text-gray-600 hover:text-[#FF6B00] transition-colors group py-1">
+                <span className="group-hover:translate-x-1 transition-transform">{cat.name}</span>
+                <span className="bg-[#F8F9FA] text-gray-400 px-2 py-0.5 rounded-full text-xs">
                   {cat.count}
                 </span>
               </a>
@@ -53,32 +56,40 @@ export default function BlogSidebar() {
         </ul>
       </div>
 
-      {/* Popular Posts */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Artikel Populer</h3>
-        <ul className="space-y-4">
+      {/* Popular Posts - Desain Minimalis */}
+      <div className="bg-white rounded-2xl border border-[#E8EAED] p-5">
+        <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <FaFire className="text-[#FF6B00] w-4 h-4" />
+          Populer
+        </h3>
+        <ul className="space-y-3">
           {popularPosts.map((post, index) => (
-            <li key={index} className="border-b border-gray-100 last:border-0 pb-3 last:pb-0">
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-                {post.title}
+            <li key={index} className="group border-b border-[#F8F9FA] last:border-0 pb-3 last:pb-0">
+              <a href="#" className="block">
+                <p className="text-sm font-medium text-gray-700 group-hover:text-[#FF6B00] transition-colors line-clamp-1">
+                  {post.title}
+                </p>
+                <p className="text-xs text-gray-400 mt-0.5">{post.date}</p>
               </a>
-              <p className="text-sm text-gray-400 mt-1">{post.date}</p>
             </li>
           ))}
         </ul>
       </div>
 
-      {/* Tags */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
+      {/* Tags - Desain Minimalis */}
+      <div className="bg-white rounded-2xl border border-[#E8EAED] p-5">
+        <h3 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+          <FaTag className="text-[#FF6B00] w-4 h-4" />
+          Tags Populer
+        </h3>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
             <a
               key={index}
               href="#"
-              className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm hover:bg-blue-50 hover:text-blue-600 transition-colors"
+              className="px-3 py-1 bg-[#F8F9FA] text-gray-600 rounded-full text-xs hover:bg-[#FF6B00]/10 hover:text-[#FF6B00] transition-all hover:scale-105"
             >
-              {tag}
+              #{tag}
             </a>
           ))}
         </div>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { fetchData } from '../../lib/supabaseClient'
 import BlogCard from './BlogCard'
+import { FaNewspaper } from 'react-icons/fa'
 
 export default function BlogGrid() {
   const [posts, setPosts] = useState([])
@@ -15,7 +17,6 @@ export default function BlogGrid() {
       })
 
       if (!error && data) {
-        // Map database fields to the fields expected by BlogCard
         const mappedPosts = data.map(post => {
           let tagsList = []
           try {
@@ -51,18 +52,35 @@ export default function BlogGrid() {
   }, [])
 
   if (loading) {
-    return <div className="text-center py-12 text-slate-500 col-span-full">Memuat blog...</div>
+    return (
+      <div className="py-24 text-center">
+        <div className="inline-block">
+          <div className="relative w-12 h-12 mx-auto">
+            <div className="absolute inset-0 border-3 border-[#FF6B00]/20 rounded-full" />
+            <div className="absolute inset-0 border-3 border-t-[#FF6B00] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin" />
+          </div>
+          <p className="text-gray-400 text-sm mt-4">Memuat artikel...</p>
+        </div>
+      </div>
+    )
   }
 
   if (posts.length === 0) {
-    return <div className="text-center py-12 text-slate-500 col-span-full">Belum ada artikel yang diterbitkan.</div>
+    return (
+      <div className="text-center py-16">
+        <div className="text-5xl mb-4">📝</div>
+        <p className="text-gray-400 text-lg">Belum ada artikel yang diterbitkan.</p>
+      </div>
+    )
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {posts.map((post) => (
-        <BlogCard key={post.id} post={post} />
-      ))}
-    </div>
+    <section className="py-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <BlogCard key={post.id} post={post} />
+        ))}
+      </div>
+    </section>
   )
 }

@@ -1,3 +1,6 @@
+import { motion } from 'framer-motion'
+import { FaBuilding, FaArrowRight, FaCrown } from 'react-icons/fa'
+
 export default function ClientLogos() {
   const clients = [
     { name: 'Balanja.id', color: '#00A651' },
@@ -7,96 +10,75 @@ export default function ClientLogos() {
   ]
 
   return (
-    <section className="relative py-16 overflow-hidden">
-      {/* Background dengan subtle pattern */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50/50 to-white" />
-      <div 
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, #0f172a 1px, transparent 0)`,
-          backgroundSize: '24px 24px'
-        }}
-      />
+    <section className="relative py-24 overflow-hidden bg-white">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FF6B00] via-[#C9A84C] to-[#FF6B00]" />
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
       
-      {/* Top & Bottom Border Gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-300/60 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-300/60 to-transparent" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Header Premium */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Header dengan dekorasi */}
-        <div className="text-center mb-12">
-          <div className="inline-flex flex-col items-center">
-            {/* Label Badge */}
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-slate-200/70 shadow-sm mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mr-2" />
-              <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-slate-500 font-bold">
-                BEKERJA SAMA DENGAN
-              </p>
-            </div>
-            
-            {/* Decorative divider */}
-            <div className="flex items-center gap-2 w-full max-w-[200px]">
-              <div className="h-px flex-1 bg-gradient-to-r from-transparent to-slate-300" />
-              <div className="w-1 h-1 rounded-full bg-slate-300 rotate-45" />
-              <div className="h-px flex-1 bg-gradient-to-l from-transparent to-slate-300" />
-            </div>
-          </div>
           
-          <h3 className="text-sm sm:text-base font-semibold text-slate-600 mt-4 max-w-xl mx-auto">
-            Beberapa Bussines Solution & Consultan IT
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mt-6 max-w-2xl mx-auto">
+            Dipercaya oleh <span className="text-[#FF6B00]">Perusahaan Terkemuka</span>
           </h3>
-        </div>
+        </motion.div>
 
-        {/* Grid Logo dengan background card */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        {/* Grid Logo Premium */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {clients.map((client, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group relative"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              whileHover={{ y: -6 }}
+              className="group"
             >
-              {/* Card Container */}
-              <div className="relative flex items-center justify-center px-4 py-4 sm:py-5
-                           bg-white rounded-xl shadow-sm 
-                           border border-slate-200/70
-                           hover:shadow-md hover:border-slate-300
-                           hover:-translate-y-0.5
-                           transition-all duration-300 ease-out
-                           cursor-default">
+              <div className="relative flex items-center justify-center px-6 py-7 bg-white rounded-xl border-2 border-gray-100 hover:border-[#FF6B00]/40 hover:shadow-xl transition-all duration-400 overflow-hidden">
+                {/* Hover Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B00]/5 to-[#C9A84C]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
                 
-                {/* Subtle top highlight on hover */}
-                <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-current to-transparent 
-                             opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                     style={{ color: client.color }} 
-                />
-
-                {/* Background color overlay on hover */}
-                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"
-                     style={{ backgroundColor: client.color }} 
-                />
+                {/* Glow Effect */}
+                <div className="absolute -inset-1 bg-[#FF6B00] opacity-0 group-hover:opacity-[0.03] blur-xl transition-opacity duration-400" />
                 
-                {/* Nama client dengan warna brand */}
+                {/* Corner Accent */}
+                <div className="absolute top-0 right-0 w-12 h-12 bg-gradient-to-br from-[#FF6B00]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-tr-xl" />
+                
                 <span 
-                  className="relative text-sm sm:text-base font-bold tracking-wide
-                           transition-all duration-300 group-hover:scale-105"
-                  style={{ 
-                    color: client.color,
-                    textShadow: '0 1px 2px rgba(255,255,255,0.8)'
-                  }}
+                  className="relative text-base font-bold tracking-wide transition-all duration-300 group-hover:scale-105"
+                  style={{ color: client.color }}
                 >
                   {client.name}
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Divider bawah dengan partner info */}
-        <div className="mt-10 flex flex-col items-center gap-2">
-          <div className="h-px w-32 bg-gradient-to-r from-transparent via-slate-300/60 to-transparent" />
-          <p className="text-[10px] sm:text-xs text-slate-400 font-medium tracking-wide mt-2">
-            Dan masih banyak lagi partner terpercaya lainnya
+        {/* Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-12 flex flex-col items-center gap-4"
+        >
+          <div className="flex items-center gap-4">
+            <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
+            <span className="text-[#C9A84C]">✦</span>
+            <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
+          </div>
+          <p className="text-sm text-gray-500 font-medium flex items-center gap-2">
+            Dan 50+ partner terpercaya lainnya
+            <FaArrowRight className="w-4 h-4 text-[#FF6B00]" />
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
